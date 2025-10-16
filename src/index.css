@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Luckiest Guy";
+  src: url("./assets/Fonts/LuckiestGuy-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caveat";
+  src: url("./assets/Fonts/Caveat-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/Fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* definisikan font family ke dalam theme Tailwind */
+@theme {
+  --color-primary: #618264;
+  --font-luckiest: "Luckiest Guy", cursive;
+  --font-caveat: "Caveat";
+  --font-inter: "Inter";
+}
+
+
+/* --- Tambahkan ini di akhir file CSS Anda --- */
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}
+
+.accordion-content.open {
+  max-height: 500px; /* Atur nilai yang cukup besar untuk menampung konten */
+  transition: max-height 1s ease-in-out;
+}
+
+.text-outline-shadow {
+  text-shadow: 
+    -1px -1px 0 #618264,
+     1px -1px 0 #618264,
+    -1px  1px 0 #618264,
+     1px  1px 0 #618264;
+}
+
+
+.text-outline-shadow-heading {
+  text-shadow: -1px -1px 0 #1a74e3, 1px -1px 0 #1a74e3, -1px 1px 0 #1a74e3,
+    1px 1px 0 #1a74e3, 2px 2px 0 #0d3e93; /* Shadow halus */
+}
+
+/* ... Tambahkan ini di akhir file CSS Anda ... */
+
+/* Penyesuaian pada Banner agar lebih fleksibel */
+.birthday-banner {
+  /* ... properti yang sudah ada ... */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px; /* Memberi tinggi minimal */
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.banner-close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* Tombol Next di dalam Banner */
+.wish-next-button {
+  margin-top: 20px;
+  padding: 8px 24px;
+  background-color: white;
+  color: #ff1493; /* Warna pink yang cocok */
+  border: 2px solid #ff1493;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wish-next-button:hover {
+  background-color: #ff1493;
+  color: white;
+  transform: scale(1.05);
+}
+
+.cake-layer {
+  @apply absolute w-[250px] h-[100px] rounded-full bg-pink-200;
+  box-shadow: 0 2px 0px #fb6f92, 0 4px 0px #ff8fab, 0 6px 0px #ff8fab,
+    0 8px 0px #ff8fab, 0 10px 0px #ff8fab, 0 12px 0px #ff8fab,
+    0 14px 0px #ff8fab, 0 16px 0px #ff8fab, 0 18px 0px #ff8fab,
+    0 20px 0px #ff8fab, 0 22px 0px #ff8fab, 0 24px 0px #ff8fab,
+    0 26px 0px #ff8fab, 0 28px 0px #ff8fab, 0 30px 0px #ff8fab;
+}
+
+.layer-top {
+  top: 0;
+}
+.layer-middle {
+  top: 33px;
+}
+.layer-bottom {
+  top: 66px;
+}
+
+.icing {
+  @apply absolute bg-[#f0e4d0] rounded-full;
+  width: 240px;
+  height: 90px;
+  top: 2px;
+  left: 5px;
+}
+.icing:before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  bottom: 6px;
+  left: 5px;
+  background-color: #f4ebdc;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #f6efe3, 0 0 4px #f6efe3, 0 0 4px #f6efe3;
+}
+
+.drip {
+  @apply absolute bg-[#f0e4d0];
+  width: 50px;
+  height: 60px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+.drip1 {
+  top: 53px;
+  left: 5px;
+  transform: skewY(15deg);
+  height: 48px;
+  width: 40px;
+}
+.drip2 {
+  top: 69px;
+  left: 181px;
+  transform: skewY(-15deg);
+}
+.drip3 {
+  top: 54px;
+  left: 90px;
+  width: 80px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.flame {
+  position: absolute;
+  background-color: orange;
+  width: 10px;
+  height: 25px;
+  border-radius: 8px 8px 8px 8px/20px 20px 8px 8px;
+  top: -34px;
+  left: 50%;
+  margin-left: -7.5px;
+  z-index: 10;
+  animation: flicker 1s ease-in-out alternate infinite;
+}
+@keyframes flicker {
+  0% {
+    transform: skewX(5deg);
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+  }
+  50% {
+    transform: skewX(-5deg);
+    box-shadow: 0 0 60px rgba(255, 165, 0, 0.7);
+  }
+  100% {
+    transform: skewX(5deg);
+    box-shadow: 0 0 40px rgba(255, 165, 0, 0.6);
+  }
+}
+
+.logo-backs2 {
+  display: none !important;
+}
+
+/* ... (Tambahkan ini di akhir file CSS Anda) ... */
+
+/* Tombol Tiup Lilin */
+.blow-button {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.blow-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.blow-button:active {
+  transform: translateY(-1px);
+}
+
+/* Banner Ucapan Ulang Tahun */
+.birthday-banner {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-weight: bold;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 100;
+  border: 2px solid #578fca;
+  box-shadow: 0 0 30px #578fca;
+  animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+
+
+/* Animasi untuk Banner */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@media (max-width: 500px){
+  .birthday-banner {
+    top: 12%;
+  }
+}
