@@ -24,7 +24,7 @@
 
 /* definisikan font family ke dalam theme Tailwind */
 @theme {
-  --color-primary: #618264;
+  --color-primary: #A3968D;
   --font-luckiest: "Luckiest Guy", cursive;
   --font-caveat: "Caveat";
   --font-inter: "Inter";
@@ -93,8 +93,8 @@
   margin-top: 20px;
   padding: 8px 24px;
   background-color: white;
-  color: #ff1493; /* Warna pink yang cocok */
-  border: 2px solid #ff1493;
+  color: #524b47; /* Warna pink yang cocok */
+  border: 2px solid #524b47;
   border-radius: 50px;
   font-weight: bold;
   cursor: pointer;
@@ -102,18 +102,18 @@
 }
 
 .wish-next-button:hover {
-  background-color: #ff1493;
+  background-color: #312d2b;
   color: white;
   transform: scale(1.05);
 }
 
 .cake-layer {
-  @apply absolute w-[250px] h-[100px] rounded-full bg-pink-200;
-  box-shadow: 0 2px 0px #fb6f92, 0 4px 0px #ff8fab, 0 6px 0px #ff8fab,
-    0 8px 0px #ff8fab, 0 10px 0px #ff8fab, 0 12px 0px #ff8fab,
-    0 14px 0px #ff8fab, 0 16px 0px #ff8fab, 0 18px 0px #ff8fab,
-    0 20px 0px #ff8fab, 0 22px 0px #ff8fab, 0 24px 0px #ff8fab,
-    0 26px 0px #ff8fab, 0 28px 0px #ff8fab, 0 30px 0px #ff8fab;
+  @apply absolute w-[250px] h-[100px] rounded-full bg-[#A3968D];
+  box-shadow: 0 2px 0px #fb6f92, 0 4px 0px #524b47, 0 6px 0px #524b47,
+    0 8px 0px #524b47, 0 10px 0px #524b47, 0 12px 0px #524b47,
+    0 14px 0px #524b47, 0 16px 0px #524b47, 0 18px 0px #524b47,
+    0 20px 0px #524b47, 0 22px 0px #524b47, 0 24px 0px #524b47,
+    0 26px 0px #524b47, 0 28px 0px #524b47, 0 30px 0px #524b47;
 }
 
 .layer-top {
@@ -212,7 +212,7 @@
   font-size: 1.2rem;
   font-weight: bold;
   color: white;
-  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  background: #524b47;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -232,7 +232,7 @@
 /* Banner Ucapan Ulang Tahun */
 .birthday-banner {
   position: absolute;
-  top: 28%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.7);
@@ -241,8 +241,8 @@
   border-radius: 15px;
   text-align: center;
   z-index: 100;
-  border: 2px solid #578fca;
-  box-shadow: 0 0 30px #578fca;
+  border: 2px solid #524b47;
+  box-shadow: 0 0 30px #524b47;
   animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
@@ -260,8 +260,3 @@
   }
 }
 
-@media (max-width: 500px){
-  .birthday-banner {
-    top: 12%;
-  }
-}

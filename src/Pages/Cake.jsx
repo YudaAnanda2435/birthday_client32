@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import confetti from "canvas-confetti";
 import hbdSong from "/nothing.mp3";
-import Panda1 from "../assets/img/sedih.gif";
+import Panda1 from "../assets/img/bear.png";
 import MainLayouts from "../Components/Fragments/MainLayouts";
 import Buttons from "../Components/Elements/Buttons";
 import { useNavigate } from "react-router-dom";
@@ -125,7 +125,7 @@ export default function Cake() {
 
         {/* ... sisa kode JSX Anda tetap sama ... */}
         <div
-          className="text-2xl text-center md:text-3xl font-bold text-pink-800 bg-pink-400 px-4 py-2 rounded-lg shadow mb-6 border-2 border-pink-200"
+          className="text-2xl w-fit mx-auto text-center md:text-3xl font-bold text-gray-100 bg-[#524b47] px-4 py-2 rounded-lg shadow mb-6 border-2 border-pink-200"
           data-aos="fade-up"
           data-aos-delay="450"
           data-aos-offset="20"
@@ -137,7 +137,7 @@ export default function Cake() {
             <img
               src={Panda1}
               alt="Panda GIF"
-              className="w-24 relative !right-10 md:right-8 md:w-32 hidden md:block"
+              className=" relative !right-10 md:right-8 w-32 md:w-44 hidden md:block"
             />
           )}
           <div
@@ -167,17 +167,17 @@ export default function Cake() {
           </div>
           {showPandas && (
             <div className="flex flex-row gap-6">
-              <img src={Panda1} alt="Panda GIF" className="w-24 md:w-32" />
+              <img src={Panda1} alt="Panda GIF" className="w-32 md:w-44" />
               <img
                 src={Panda1}
                 alt="Panda GIF"
-                className="w-24 md:w-32 md:hidden"
+                className="w-32 md:w-44 md:hidden"
               />
             </div>
           )}
         </div>
         {!showBanner && candles.length > 0 && (
-          <button onClick={handleCelebration} className="blow-button">
+          <button onClick={handleCelebration} className="blow-button w-fit mx-auto">
             Tiup Lilin! 🎂
           </button>
         )}

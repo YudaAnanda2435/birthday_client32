@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import MainLayouts from "../Components/Fragments/MainLayouts";
 import Buttons from "../Components/Elements/Buttons";
 import Heading from "../Components/Fragments/Heading";
-import Loading from "../assets/img/mis.jpg";
+import Loading from "../assets/img/adit.jpg";
 import { IoMdMusicalNotes } from "react-icons/io";
 
 const VideoPage = () => {
@@ -32,11 +32,15 @@ const VideoPage = () => {
               data-aos-delay="500"
               href="https://open.spotify.com/playlist/4qxFnBUn2JSSFWqMYp6MSs?si=UlOJmqDcTCWHTVXdR6QFWw&pt=f2d811ede8e4df67a1ac40586453a97d&pi=Kqk2y9viQIaV3"
               target="blank"
-              className="py-4 flex flex-row gap-2 items-center px-6 mt-12 text-white font-inter bg-primary rounded-4xl cursor-pointer"
+              className="py-4 w-fit mx-auto flex flex-row gap-2 items-center px-6 mt-12 text-white font-inter bg-primary rounded-4xl cursor-pointer"
             >
               play music on spotify
               <IoMdMusicalNotes />
             </a>
+            <p className="mt-4 w-full max-w-[600px] text-center mb-16 font-caveat text-[20px]">
+              maybe someday, when you play these songs again, you’ll feel what i
+              felt and remember how it was to be loved by me.
+            </p>
           </div>
         </div>
 
