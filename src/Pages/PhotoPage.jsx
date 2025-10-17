@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from "react"; // 1. Pastikan useRef diimpor
+import { useState, useEffect } from "react"; // useRef tidak lagi diperlukan di sini
 import HTMLFlipBook from "react-pageflip";
 import MainLayouts from "../Components/Fragments/MainLayouts";
-// ... (impor gambar Anda tetap sama)
 import Flip3 from "../assets/img/4.png";
 import Flip4 from "../assets/img/3.png";
 import Flip5 from "../assets/img/5.png";
@@ -20,36 +19,8 @@ import { playMusic, stopMusic } from "../services/audioService";
 import backgroundMusic from "/diakhir-perang.mp3";
 import { photoPageTexts } from "../data";
 
-// --- PERBARUI Komponen TypingText ---
-const TypingText = ({ text, speed = 200, className, scrollContainerRef }) => {
-  const [displayedText, setDisplayedText] = useState("");
-
-  // useEffect ini untuk mengetik teks
-  useEffect(() => {
-    let index = 0;
-    const intervalId = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText((prev) => prev + text.charAt(index));
-        index++;
-      } else {
-        clearInterval(intervalId);
-      }
-    }, speed);
-    return () => clearInterval(intervalId);
-  }, [text, speed]);
-
-  // BARU: useEffect ini khusus untuk auto-scroll
-  useEffect(() => {
-    // Cek apakah ref-nya ada
-    if (scrollContainerRef && scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      // Atur posisi scroll ke paling bawah
-      container.scrollTop = container.scrollHeight;
-    }
-  }, [displayedText, scrollContainerRef]); // Jalankan setiap kali teks bertambah
-
-  return <p className={className}>{displayedText}</p>;
-};
+// HAPUS: Komponen TypingText tidak diperlukan lagi
+// const TypingText = ({ ... }) => { ... };
 
 const useIsMobile = (breakpoint = 768) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
@@ -65,8 +36,8 @@ function Book() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
-  // BARU: Buat ref untuk kontainer yang bisa di-scroll
-  const scrollableContainerRef = useRef(null);
+  // HAPUS: Ref untuk auto-scroll tidak diperlukan lagi
+  // const scrollableContainerRef = useRef(null);
 
   useEffect(() => {
     playMusic(backgroundMusic);
@@ -92,7 +63,7 @@ function Book() {
     <MainLayouts background={`bg relative`}>
       <div className="pt-8 px-6 py-6 w-full md:px-14 rounded-2xl my-6 sm:my-0 bg-primary min-h-[90vh] justify-center flex flex-col md:items-center">
         <h1
-          className="main-title mb-6"
+          className="main-title text-2xl md:text-3xl mb-6"
           data-aos="zoom-in"
           data-aos-delay="350"
           data-aos-offset="20"
@@ -137,26 +108,18 @@ function Book() {
         </div>
         <ul className="flex mt-6 justify-between w-full flex-col gap-4">
           <li
-            // BARU: Pasang ref ke elemen li
-            ref={scrollableContainerRef}
-            className="text-gray-800 flex flex-col gap-4 bg-[#DEDED1] bg-opacity-20 rounded-2xl p-4 h-48 overflow-y-auto"
+            // HAPUS: atribut ref tidak lagi diperlukan
+            className="text-gray-800 flex flex-col gap-4 bg-[#DEDED1] bg-opacity-20 rounded-2xl p-4 hauto "
             data-aos="zoom-in"
             data-aos-delay="650"
           >
-            <TypingText
-              text={photoPageTexts.firstParagraph}
-              speed={70}
-              className="w-full lowercase font-caveat text-2xl justify-center m-auto text-center"
-              // BARU: Teruskan ref ke komponen TypingText
-              scrollContainerRef={scrollableContainerRef}
-            />
-            <TypingText
-              text={photoPageTexts.secondParagraph}
-              speed={70}
-              className="w-full font-caveat text-2xl text-center justify-center m-auto"
-              // BARU: Teruskan ref ke komponen TypingText
-              scrollContainerRef={scrollableContainerRef}
-            />
+            {/* UBAH: Gunakan tag <p> biasa */}
+            <p className="w-full lowercase font-caveat text-2xl justify-center m-auto text-center">
+              {photoPageTexts.firstParagraph}
+            </p>
+            <p className="w-full font-caveat text-2xl text-center justify-center m-auto">
+              {photoPageTexts.secondParagraph}
+            </p>
           </li>
         </ul>
         <div className="mt-8 flex w-full !justify-end text-center">

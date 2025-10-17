@@ -34,7 +34,7 @@ const VideoPage = () => {
               target="blank"
               className="py-4 w-fit mx-auto flex flex-row gap-2 items-center px-6 mt-12 text-white font-inter bg-primary rounded-4xl cursor-pointer"
             >
-              play music on spotify
+              from me, with all my heart
               <IoMdMusicalNotes />
             </a>
             <p className="mt-4 w-full max-w-[600px] text-center mb-16 font-caveat text-[20px]">

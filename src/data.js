@@ -1,6 +1,6 @@
 // Di file ini, kita ekspor semua teks yang akan digunakan
 export const photoPageTexts = {
-  title: "For You, With love ♡ <br /> this ur memories!!!",
+  title: "For You, With love ♡ ",
   firstParagraph: `
 i know i don’t always say how i feel
 but every little thing here is made with love, just for you
