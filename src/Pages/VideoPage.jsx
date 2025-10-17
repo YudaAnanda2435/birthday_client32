@@ -37,11 +37,11 @@ const VideoPage = () => {
               from me, with all my heart
               <IoMdMusicalNotes />
             </a>
-            <p className="mt-4 w-full max-w-[600px] text-center mb-16 font-caveat text-[20px]">
-              maybe someday, when you play these songs again, you’ll feel what i
-              felt and remember how it was to be loved by me.
-            </p>
           </div>
+          <p className="mt-4 w-full max-w-[600px] text-center mb-16 font-caveat text-[20px]">
+            maybe someday, when you play these songs again, you’ll feel what i
+            felt and remember how it was to be loved by me.
+          </p>
         </div>
 
         <div className="absolute bottom-5 right-[2%] flex w-full !justify-end text-center">

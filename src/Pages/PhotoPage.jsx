@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; // useRef tidak lagi diperlukan di sini
+import { useState, useEffect } from "react";
 import HTMLFlipBook from "react-pageflip";
 import MainLayouts from "../Components/Fragments/MainLayouts";
 import Flip3 from "../assets/img/4.png";
@@ -17,10 +17,8 @@ import Buttons from "../Components/Elements/Buttons";
 import { useNavigate } from "react-router-dom";
 import { playMusic, stopMusic } from "../services/audioService";
 import backgroundMusic from "/diakhir-perang.mp3";
-import { photoPageTexts } from "../data";
-
-// HAPUS: Komponen TypingText tidak diperlukan lagi
-// const TypingText = ({ ... }) => { ... };
+// 1. Ganti impor ke 'flipbookTexts' dan pastikan path file data benar
+import { flipbookTexts } from "../data";
 
 const useIsMobile = (breakpoint = 768) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
@@ -36,8 +34,8 @@ function Book() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
-  // HAPUS: Ref untuk auto-scroll tidak diperlukan lagi
-  // const scrollableContainerRef = useRef(null);
+  // 2. State untuk melacak halaman yang sedang aktif
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     playMusic(backgroundMusic);
@@ -59,26 +57,32 @@ function Book() {
 
   const handleNavigateHome = () => navigate("/home");
 
+  // 3. Fungsi untuk memperbarui state saat halaman dibalik
+  const handleFlip = (e) => {
+    setCurrentPage(e.data);
+  };
+
   return (
     <MainLayouts background={`bg relative`}>
       <div className="pt-8 px-6 py-6 w-full md:px-14 rounded-2xl my-6 sm:my-0 bg-primary min-h-[90vh] justify-center flex flex-col md:items-center">
         <h1
-          className="main-title text-2xl md:text-3xl mb-6"
+          className="main-title text-3xl md:text-4xl mb-6"
           data-aos="zoom-in"
           data-aos-delay="350"
           data-aos-offset="20"
-          dangerouslySetInnerHTML={{ __html: photoPageTexts.title }}
-        />
+        >
+          for you, with love ♡
+        </h1>
         <div
           className="flipbook-wrapper"
           data-aos="zoom-in"
           data-aos-delay="550"
           data-aos-offset="20"
         >
-          {/* ... Kode FlipBook Anda tetap sama ... */}
           <HTMLFlipBook
             width={300}
             height={400}
+            onFlip={handleFlip} // 4. Tambahkan event onFlip
             maxShadowOpacity={0.5}
             drawShadow={true}
             showCover={!isMobile}
@@ -92,7 +96,7 @@ function Book() {
               <div className="page" key={index}>
                 <img
                   src={image.file}
-                  alt={`Page ${image.id}`}
+                  alt={`Page ${index + 1}`}
                   className="page-image"
                 />
               </div>
@@ -106,22 +110,22 @@ function Book() {
             </div>
           </HTMLFlipBook>
         </div>
-        <ul className="flex mt-6 justify-between w-full flex-col gap-4">
-          <li
-            // HAPUS: atribut ref tidak lagi diperlukan
-            className="text-gray-800 flex flex-col gap-4 bg-[#DEDED1] bg-opacity-20 rounded-2xl p-4 hauto "
-            data-aos="zoom-in"
-            data-aos-delay="650"
+
+        {/* 5. Ganti 'ul' dengan 'div' untuk menampilkan teks dinamis */}
+        <div
+          className="text-gray-800 text-center mt-6 bg-[#DEDED1] bg-opacity-20 rounded-2xl p-4 w-full max-w-lg  flex items-center justify-center"
+          data-aos="zoom-in"
+          data-aos-delay="650"
+        >
+          <p
+            key={currentPage} // 'key' ini penting untuk memicu animasi ulang
+            className="w-full font-caveat text-2xl animate-fade-in"
           >
-            {/* UBAH: Gunakan tag <p> biasa */}
-            <p className="w-full lowercase font-caveat text-2xl justify-center m-auto text-center">
-              {photoPageTexts.firstParagraph}
-            </p>
-            <p className="w-full font-caveat text-2xl text-center justify-center m-auto">
-              {photoPageTexts.secondParagraph}
-            </p>
-          </li>
-        </ul>
+            {/* Tampilkan teks berdasarkan halaman saat ini */}
+            {flipbookTexts[currentPage]}
+          </p>
+        </div>
+
         <div className="mt-8 flex w-full !justify-end text-center">
           <Buttons
             className={"bg-white !text-primary "}
