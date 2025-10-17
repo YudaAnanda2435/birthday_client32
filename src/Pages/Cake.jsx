@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import confetti from "canvas-confetti";
-import hbdSong from "/nothing.mp3";
 import Panda1 from "../assets/img/bear.png";
 import MainLayouts from "../Components/Fragments/MainLayouts";
 import Buttons from "../Components/Elements/Buttons";
 import { useNavigate } from "react-router-dom";
+
+// 1. Impor fungsi dari audioService dan file musiknya
+import { playMusic, stopMusic } from "../services/audioService";
+import hbdSong from "/nothing.mp3";
 
 const initialCandles = [
   { id: 1, left: 100, top: -20, out: false },
@@ -23,17 +26,22 @@ export default function Cake() {
   const navigate = useNavigate();
   const cakeRef = useRef(null);
   const [candles, setCandles] = useState(initialCandles);
-  const audioRef = useRef(new Audio(hbdSong));
+  // HAPUS: audioRef lokal tidak diperlukan lagi
+  // const audioRef = useRef(new Audio(hbdSong));
   const [showBanner, setShowBanner] = useState(false);
   const [showPandas, setShowPandas] = useState(false);
   const [bannerStep, setBannerStep] = useState(1);
 
+  // 2. Gunakan useEffect untuk memutar musik secara otomatis
   useEffect(() => {
+    // Saat halaman dibuka, putar musiknya
+    playMusic(hbdSong);
+
+    // Cleanup function: Berjalan saat Anda meninggalkan halaman
     return () => {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      stopMusic();
     };
-  }, []);
+  }, []); // Array kosong memastikan ini berjalan sekali saat masuk dan keluar
 
   const launchCustomConfetti = () => {
     const duration = 5 * 1000;
@@ -63,9 +71,9 @@ export default function Cake() {
   const handleCelebration = () => {
     setCandles((prev) => prev.map((c) => ({ ...c, out: true })));
     launchCustomConfetti();
-    audioRef.current.play();
+    // HAPUS: Pemutaran musik sudah tidak dilakukan di sini lagi
+    // audioRef.current.play();
     setShowPandas(true);
-    // Reset banner ke step 1 setiap kali perayaan dimulai
     setBannerStep(1);
     setTimeout(() => {
       setShowBanner(true);
@@ -73,8 +81,7 @@ export default function Cake() {
   };
 
   const handleNavigateHome = () => {
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
+    // Fungsi cleanup di useEffect sudah akan menghentikan musik
     navigate("/home");
   };
 
@@ -82,7 +89,6 @@ export default function Cake() {
     setBannerStep(2);
   };
 
-  // BARU: Fungsi untuk menutup banner
   const handleCloseBanner = () => {
     setShowBanner(false);
   };
@@ -92,11 +98,9 @@ export default function Cake() {
       <div className="px-6 relative py-20 md:py-6 w-full md:px-14 rounded-2xl my-6 sm:my-0 bg-white min-h-[90vh] flex flex-col md:items-center justify-center">
         {showBanner && (
           <div className="birthday-banner">
-            {/* BARU: Tombol Close */}
             <button onClick={handleCloseBanner} className="banner-close-button">
               &times;
             </button>
-
             {bannerStep === 1 ? (
               <div className="text-center">
                 <p className="py-5 text-2xl md:text-4xl font-bold">
@@ -122,8 +126,6 @@ export default function Cake() {
             )}
           </div>
         )}
-
-        {/* ... sisa kode JSX Anda tetap sama ... */}
         <div
           className="text-2xl w-fit mx-auto text-center md:text-3xl font-bold text-gray-100 bg-[#524b47] px-4 py-2 rounded-lg shadow mb-6 border-2 border-pink-200"
           data-aos="fade-up"
@@ -177,7 +179,10 @@ export default function Cake() {
           )}
         </div>
         {!showBanner && candles.length > 0 && (
-          <button onClick={handleCelebration} className="blow-button w-fit mx-auto">
+          <button
+            onClick={handleCelebration}
+            className="blow-button w-fit mx-auto"
+          >
             Tiup Lilin! 🎂
           </button>
         )}
